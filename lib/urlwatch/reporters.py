@@ -412,7 +412,9 @@ class EMailReporter(TextReporter):
                                 self.config['smtp']['starttls'], use_auth,
                                 self.config['smtp'].get('insecure_password'))
         elif self.config['method'] == "sendmail":
-            mailer = SendmailMailer(self.config['sendmail']['path'])
+            mailer = SendmailMailer(
+                    self.config['sendmail']['path'],
+                    self.config['sendmail'].get('extra_args', []))
         else:
             logger.error('Invalid entry for method {method}'.format(method=self.config['method']))
 

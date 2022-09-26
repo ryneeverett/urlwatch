@@ -104,11 +104,12 @@ class SMTPMailer(Mailer):
 
 
 class SendmailMailer(Mailer):
-    def __init__(self, sendmail_path):
+    def __init__(self, sendmail_path, extra_args):
         self.sendmail_path = sendmail_path
+        self.extra_args = extra_args
 
     def send(self, msg):
-        p = subprocess.Popen([self.sendmail_path, '-oi', '-f', msg['From'], msg['To']],
+        p = subprocess.Popen([self.sendmail_path, *self.extra_args, '-oi', '-f', msg['From'], msg['To']],
                              stdin=subprocess.PIPE,
                              stderr=subprocess.PIPE,
                              universal_newlines=True)
