@@ -418,7 +418,7 @@ class EMailReporter(TextReporter):
         elif self.config['method'] == "sendmail":
             mailer = SendmailMailer(
                     self.config['sendmail']['path'],
-                    self.config['sendmail'].get('extra_args', []))
+                    self.config['sendmail'].get('extra_args', ''))
         else:
             logger.error('Invalid entry for method {method}'.format(method=self.config['method']))
 

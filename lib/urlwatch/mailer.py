@@ -106,7 +106,7 @@ class SMTPMailer(Mailer):
 class SendmailMailer(Mailer):
     def __init__(self, sendmail_path, extra_args):
         self.sendmail_path = sendmail_path
-        self.extra_args = extra_args
+        self.extra_args = extra_args.split(' ')
 
     def send(self, msg):
         p = subprocess.Popen([self.sendmail_path, *self.extra_args, '-oi', '-f', msg['From'], msg['To']],
